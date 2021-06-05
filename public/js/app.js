@@ -5583,21 +5583,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {};
   },
   created: function created() {
-    // if (localStorage.getItem("access_token")) {
-    //   //
-    // }
     this.checkUserState();
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
-    loggedIn: 'user/loggedIn'
+    loggedIn: "user/loggedIn"
   })),
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
-    logout: 'user/logout',
-    checkUserState: 'user/setLoggedInState'
+    logout: "user/logout",
+    checkUserState: "user/setLoggedInState"
   })), {}, {
     logoutUser: function logoutUser() {
-      this.logout(); // this.$store.dispatch("user/logout");
-
+      this.logout();
       this.$router.push({
         name: "Login"
       });
@@ -5634,9 +5630,6 @@ __webpack_require__.r(__webpack_exports__);
   name: "ProfileIndex",
   data: function data() {
     return {};
-  },
-  created: function created() {
-    console.log("profile index");
   }
 });
 
@@ -5787,14 +5780,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
-    login: 'user/login'
+    login: "user/login"
   })), {}, {
     handleSubmit: function handleSubmit(event) {
       var _this = this;
 
-      this.login(this.user) // this.$store
-      //   .dispatch("user/login", this.user)
-      .then(function (response) {
+      this.login(this.user).then(function (response) {
         console.log(response.data);
         Toast.fire({
           icon: "success",

@@ -43,12 +43,12 @@ const router = new VueRouter({
                     }
                 },
                 {
-                    name: "resetpassword",
+                    name: "ResetPassword",
                     path: "/reset-password",
                     component: ResetPassword
                 },
                 {
-                    name: "forgetpassword",
+                    name: "ForgetPassword",
                     path: "/forget-password",
                     component: ForgetPassword
                 }
@@ -56,7 +56,7 @@ const router = new VueRouter({
         },
 
         {
-            name: "dashboard",
+            name: "Dashboard",
             path: "/dashboard",
             component: Dashboard,
             meta: {

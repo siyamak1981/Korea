@@ -20,10 +20,15 @@ const actions = {
                 .post("/api/login", payload)
                 .then(response => {
                     const token = response.data.success.token;
+                if(token){
+
                     localStorage.setItem("access_token", token);
                     localStorage.setItem("user", response.data.success.name);
                     context.commit("SET_LOGGEDIN", true);
                     resolve(response);
+                }else {
+                    reject(response)
+                }
                 })
                 .catch(error => {
                     reject(error);
@@ -33,7 +38,6 @@ const actions = {
 
     logout(context) {
         return new Promise(resolve => {
-            // axios.get("/api/logout", payload);
             localStorage.removeItem("access_token");  
             localStorage.removeItem("user");  
             context.commit("SET_LOGGEDIN", false);

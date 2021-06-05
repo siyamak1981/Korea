@@ -116,7 +116,7 @@
   </div>
 </template>
 <script>
-import { mapActions} from "vuex";
+import { mapActions } from "vuex";
 export default {
   name: "Login",
 
@@ -129,14 +129,12 @@ export default {
     };
   },
   methods: {
-      ...mapActions({
-      login: 'user/login' 
+    ...mapActions({
+      login: "user/login",
     }),
 
     handleSubmit(event) {
       this.login(this.user)
-      // this.$store
-      //   .dispatch("user/login", this.user)
         .then((response) => {
           console.log(response.data);
           Toast.fire({
@@ -152,6 +150,5 @@ export default {
         });
     },
   },
- 
 };
 </script>

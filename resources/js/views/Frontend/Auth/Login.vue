@@ -116,6 +116,7 @@
   </div>
 </template>
 <script>
+import { mapActions} from "vuex";
 export default {
   name: "Login",
 
@@ -128,20 +129,29 @@ export default {
     };
   },
   methods: {
+      ...mapActions({
+      login: 'user/login' 
+    }),
+
     handleSubmit(event) {
-      axios
-        .post("/api/login", this.user)
+      this.login(this.user)
+      // this.$store
+      //   .dispatch("user/login", this.user)
         .then((response) => {
+          console.log(response.data);
           Toast.fire({
             icon: "success",
             title: "login Successfully !",
           });
-          this.$router.push("/profile-index");
+          if (localStorage.getItem("access_token") != null) {
+            this.$router.push({ name: "ProfileIndex" });
+          }
         })
         .catch((error) => {
           console.log(error);
         });
     },
   },
+ 
 };
 </script>

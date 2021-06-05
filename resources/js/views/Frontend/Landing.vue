@@ -8,13 +8,6 @@
 <script>
 export default {
     name:"Landing",
-    data(){
-        return {
 
-        }
-    },
-        created(){
-            console.log("landing")
-        }
 }
 </script>

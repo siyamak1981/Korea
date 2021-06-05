@@ -1,5 +1,5 @@
 <template>
-   <div id="app">
+  <div id="app">
     <header class="app-header fixed-top">
       <div class="app-header-inner">
         <div class="container-fluid py-2">
@@ -257,7 +257,7 @@
                       <hr class="dropdown-divider" />
                     </li>
                     <li>
-                      <a class="dropdown-item" href="login.html">Log Out</a>
+                      <a class="dropdown-item" @click.prevent="logoutUser" v-if="loggedIn">Log Out</a>
                     </li>
                   </ul>
                 </div>
@@ -526,17 +526,62 @@
                 </a>
                 <!--//nav-link-->
               </li>
-          
             </ul>
             <!--//app-menu-->
-      
           </nav>
-
         </div>
         <!--//sidepanel-inner-->
       </div>
       <!--//app-sidepanel-->
     </header>
- <router-view></router-view>
+    <router-view></router-view>
   </div>
 </template>
+
+
+<script>
+import { mapGetters, mapActions } from "vuex";
+export default {
+  data() {
+    return {};
+  },
+  created() {
+    // if (localStorage.getItem("access_token")) {
+    //   //
+    // }
+    this.checkUserState();
+  },
+  computed: {
+    ...mapGetters({
+      loggedIn: "user/loggedIn",
+    }),
+    // loggedIn() {
+    //   return this.$store.getters["user/loggedIn"];
+    // },
+  },
+  methods: {
+    ...mapActions({
+      logout: "user/logout",
+      checkUserState: "user/setLoggedInState",
+    }),
+    logoutUser() {
+      this.logout();
+      // this.$store.dispatch("user/logout");
+
+      this.$router.push({ name: "Login" });
+      Toast.fire({
+        icon: "success",
+        title: "Logout Successfully !",
+      });
+    },
+  },
+};
+</script>
+<style scoped>
+.dropdown-item {
+  cursor: pointer;
+}
+.dropdown-item:hover {
+  color: #15a362;
+}
+</style>

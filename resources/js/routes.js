@@ -1,3 +1,5 @@
+import Middlewares from "./middlewares";
+
 import Dashboard from "./views/Backend/Dashboard.vue";
 //profile
 import Index from "./views/Backend/Profile/Index.vue";
@@ -12,6 +14,7 @@ import ResetPassword from "./views/Frontend/Auth/ResetPassword";
 
 import Vue from "vue";
 import VueRouter from "vue-router";
+import middlewares from "./middlewares";
 Vue.use(VueRouter);
 
 const router = new VueRouter({
@@ -26,12 +29,18 @@ const router = new VueRouter({
                 {
                     name: "Login",
                     path: "/login",
-                    component: Login
+                    component: Login,
+                    meta: {
+                        middleware: [Middlewares.guest]
+                    }
                 },
                 {
                     name: "Register",
                     path: "/register",
-                    component: Register
+                    component: Register,
+                    meta: {
+                        middleware: [Middlewares.guest]
+                    }
                 },
                 {
                     name: "resetpassword",
@@ -50,6 +59,9 @@ const router = new VueRouter({
             name: "dashboard",
             path: "/dashboard",
             component: Dashboard,
+            meta: {
+                middleware: [Middlewares.auth]
+            },
             children: [
                 {
                     name: "ProfileIndex",
@@ -64,6 +76,29 @@ const router = new VueRouter({
             ]
         }
     ]
+});
+
+function nextCheck(context, middleware, index) {
+    const nextMiddleware = middleware[index];
+    if (!nextMiddleware) return context.next;
+    return (...parameters) => {
+        context.next(...parameters);
+        const nextMidd = nextCheck(context, middleware, index + 1);
+        nextMiddleware({ ...context, next: nextMidd });
+    };
+}
+
+router.beforeEach((to, from, next) => {
+    if (to.meta.middleware) {
+        //if meta tag exist on route do this else return next
+        const middleware = Array.isArray(to.meta.middleware)
+            ? to.meta.middleware
+            : [to.meta.middleware];
+        const ctx = { from, next, router, to };
+        const nextMiddleware = nextCheck(ctx, middleware, 1);
+        return middleware[0]({ ...ctx, next: nextMiddleware });
+    }
+    return next();
 });
 
 export default router;

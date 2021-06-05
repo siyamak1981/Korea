@@ -3,12 +3,13 @@ import router from "./routes";
 import App from "./App.vue";
 import "bootstrap";
 
-import store from "./store";
+import store from "./store/index";
 import Vuex from "vuex";
 Vue.use(Vuex);
 
 import axios from "axios";
 window.axios = axios;
+
 
 
 // sweetalert

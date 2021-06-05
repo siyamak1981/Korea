@@ -46,7 +46,7 @@
                     <!--//col-6-->
                     <div class="col-6">
                       <div class="forgot-password text-right">
-                        <a href="reset-password.html">Forgot password?</a>
+                        <router-link :to="{name:'ForgetPassword'}">Forgot password?</router-link>
                       </div>
                     </div>
                     <!--//col-6-->

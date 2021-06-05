@@ -1,3 +1,5 @@
+import { reject } from "lodash";
+
 const state = {
     isLoggedIn: false,
     userDetails: {}
@@ -20,15 +22,17 @@ const actions = {
                 .post("/api/login", payload)
                 .then(response => {
                     const token = response.data.success.token;
-                if(token){
-
-                    localStorage.setItem("access_token", token);
-                    localStorage.setItem("user", response.data.success.name);
-                    context.commit("SET_LOGGEDIN", true);
-                    resolve(response);
-                }else {
-                    reject(response)
-                }
+                    if (token) {
+                        localStorage.setItem("access_token", token);
+                        localStorage.setItem(
+                            "user",
+                            response.data.success.name
+                        );
+                        context.commit("SET_LOGGEDIN", true);
+                        resolve(response);
+                    } else {
+                        reject(response);
+                    }
                 })
                 .catch(error => {
                     reject(error);
@@ -38,21 +42,43 @@ const actions = {
 
     logout(context) {
         return new Promise(resolve => {
-            localStorage.removeItem("access_token");  
-            localStorage.removeItem("user");  
+            localStorage.removeItem("access_token");
+            localStorage.removeItem("user");
             context.commit("SET_LOGGEDIN", false);
             resolve(true);
         });
     },
     setLoggedInState(context) {
-        return new Promise((resolve) => {
+        return new Promise(resolve => {
             if (localStorage.getItem("access_token")) {
-                context.commit('SET_LOGGEDIN', true);
-                resolve(true)
+                context.commit("SET_LOGGEDIN", true);
+                resolve(true);
             } else {
-                context.commit('SET_LOGGEDIN', false);
-                resolve(false)
+                context.commit("SET_LOGGEDIN", false);
+                resolve(false);
             }
+        });
+    },
+    forgotPassword(context, payload) {
+        return new Promise(resolve => {
+            axios.post("/api/forget-password", payload).
+            then(response => {
+                resolve(response);
+            })
+            .catch((error)=>{
+                reject(error)
+            })
+        });
+    },
+    sendResetPassword(context, payload) {
+        return new Promise(resolve => {
+            axios.post("/api/reset-password", payload).
+            then(response => {
+                resolve(response);
+            })
+            .catch((error)=>{
+                reject(error)
+            })
         });
     }
 };

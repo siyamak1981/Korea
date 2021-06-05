@@ -16,9 +16,6 @@ export default {
 
         }
     },
-    created(){
-
-        console.log("profile index")
-    }
+ 
 }
 </script>

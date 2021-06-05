@@ -546,18 +546,12 @@ export default {
     return {};
   },
   created() {
-    // if (localStorage.getItem("access_token")) {
-    //   //
-    // }
     this.checkUserState();
   },
   computed: {
     ...mapGetters({
       loggedIn: "user/loggedIn",
     }),
-    // loggedIn() {
-    //   return this.$store.getters["user/loggedIn"];
-    // },
   },
   methods: {
     ...mapActions({
@@ -566,8 +560,6 @@ export default {
     }),
     logoutUser() {
       this.logout();
-      // this.$store.dispatch("user/logout");
-
       this.$router.push({ name: "Login" });
       Toast.fire({
         icon: "success",

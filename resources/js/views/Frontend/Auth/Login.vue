@@ -36,6 +36,7 @@
                     placeholder="Password"
                     required="required"
                   />
+                </div>
                   <div class="extra mt-3 row justify-content-between">
                     <div class="col-6">
                       <div class="form-check">
@@ -52,8 +53,8 @@
                     <!--//col-6-->
                   </div>
                   <!--//extra-->
-                </div>
-                <!--//form-group-->
+            
+          
                 <div class="text-center">
                   <button
                     type="submit"

@@ -34060,16 +34060,16 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_10__["default"]({
         middleware: [_middlewares__WEBPACK_IMPORTED_MODULE_0__["default"].guest]
       }
     }, {
-      name: "resetpassword",
+      name: "ResetPassword",
       path: "/reset-password",
       component: _views_Frontend_Auth_ResetPassword__WEBPACK_IMPORTED_MODULE_8__["default"]
     }, {
-      name: "forgetpassword",
+      name: "ForgetPassword",
       path: "/forget-password",
       component: _views_Frontend_Auth_ForgetPassword__WEBPACK_IMPORTED_MODULE_7__["default"]
     }]
   }, {
-    name: "dashboard",
+    name: "Dashboard",
     path: "/dashboard",
     component: _views_Backend_Dashboard_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     meta: {
@@ -34185,10 +34185,15 @@ var actions = {
     return new Promise(function (resolve, reject) {
       axios.post("/api/login", payload).then(function (response) {
         var token = response.data.success.token;
-        localStorage.setItem("access_token", token);
-        localStorage.setItem("user", response.data.success.name);
-        context.commit("SET_LOGGEDIN", true);
-        resolve(response);
+
+        if (token) {
+          localStorage.setItem("access_token", token);
+          localStorage.setItem("user", response.data.success.name);
+          context.commit("SET_LOGGEDIN", true);
+          resolve(response);
+        } else {
+          reject(response);
+        }
       })["catch"](function (error) {
         reject(error);
       });
@@ -34196,7 +34201,6 @@ var actions = {
   },
   logout: function logout(context) {
     return new Promise(function (resolve) {
-      // axios.get("/api/logout", payload);
       localStorage.removeItem("access_token");
       localStorage.removeItem("user");
       context.commit("SET_LOGGEDIN", false);

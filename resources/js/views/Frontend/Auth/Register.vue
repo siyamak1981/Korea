@@ -136,6 +136,7 @@
   </div>
 </template>
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "Register",
   data() {
@@ -149,24 +150,28 @@ export default {
     };
   },
   methods: {
-    submitForm(event) {
-      console.log(event, this.$refs.registerform);
-      axios
-        .post("/api/register", this.newUser)
-        .then((response) => {
-          Toast.fire({
-            icon: "success",
-            title: "Register Successfully !",
-          });
+    ...mapActions({
+      register: "user/register",
+    }),
 
-          this.$router.push("/login");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      submitForm(event) {
+        console.log(event, this.$refs.registerform);
+        this.register(this.newUser)
+          .then((response) => {
+            Toast.fire({
+              icon: "success",
+              title: "Register Successfully !",
+            });
+
+            this.$router.push("/login");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      },
     },
-  },
-};
+  };
+
 </script>
 <style scoped>
 </style>

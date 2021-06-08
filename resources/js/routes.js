@@ -14,7 +14,7 @@ import ResetPassword from "./views/Frontend/Auth/ResetPassword";
 
 import Vue from "vue";
 import VueRouter from "vue-router";
-import middlewares from "./middlewares";
+
 Vue.use(VueRouter);
 
 const router = new VueRouter({

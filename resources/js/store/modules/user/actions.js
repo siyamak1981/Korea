@@ -1,21 +1,17 @@
-import { reject } from "lodash";
+export default  {
+    register: function(context, payload) {
+        return new Promise((resolve, reject) => {
+            axios
+                .post(`./api/register`, payload)
+                .then(res => {
+                    resolve(res);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+    },
 
-const state = {
-    isLoggedIn: false,
-    userDetails: {}
-};
-const getters = {
-    loggedIn(state) {
-        return state.isLoggedIn;
-    }
-};
-
-const mutations = {
-    SET_LOGGEDIN(state, payload) {
-        state.isLoggedIn = payload;
-    }
-};
-const actions = {
     login(context, payload) {
         return new Promise((resolve, reject) => {
             axios
@@ -61,32 +57,26 @@ const actions = {
     },
     forgotPassword(context, payload) {
         return new Promise(resolve => {
-            axios.post("/api/forget-password", payload).
-            then(response => {
-                resolve(response);
-            })
-            .catch((error)=>{
-                reject(error)
-            })
+            axios
+                .post("/api/forget-password", payload)
+                .then(response => {
+                    resolve(response);
+                })
+                .catch(error => {
+                    reject(error);
+                });
         });
     },
     sendResetPassword(context, payload) {
         return new Promise(resolve => {
-            axios.post("/api/reset-password", payload).
-            then(response => {
-                resolve(response);
-            })
-            .catch((error)=>{
-                reject(error)
-            })
+            axios
+                .post("/api/reset-password", payload)
+                .then(response => {
+                    resolve(response);
+                })
+                .catch(error => {
+                    reject(error);
+                });
         });
     }
-};
-
-export default {
-    namespaced: true,
-    state,
-    mutations,
-    getters,
-    actions
 };

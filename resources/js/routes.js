@@ -1,6 +1,7 @@
 import Middlewares from "./middlewares";
 
 import Dashboard from "./views/Backend/Dashboard.vue";
+
 //profile
 import Index from "./views/Backend/Profile/Index.vue";
 import Edit from "./views/Backend/Profile/Edit.vue";

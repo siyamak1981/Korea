@@ -7,13 +7,8 @@ import store from "./store/index";
 import Vuex from "vuex";
 Vue.use(Vuex);
 
-import axios from "axios";
-window.axios = axios;
-
-
-
 // sweetalert
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 window.Swal = Swal;
 const Toast = Swal.mixin({
     toast: true,
@@ -28,7 +23,21 @@ const Toast = Swal.mixin({
 });
 window.Toast = Toast;
 
+import axios from "axios";
+window.axios = axios;
 
+axios.interceptors.request.use(
+    function(config) {
+        const token = localStorage.getItem("access_token");
+        if (token) {
+            config.headers.common["Authorization"] = `Bearer ${token}`;
+        }
+        return config;
+    },
+    function(error) {
+        return Promise.reject(error);
+    }
+);
 
 new Vue({
     store,

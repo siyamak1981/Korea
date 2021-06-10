@@ -1,3 +1,5 @@
+import { reject } from "lodash";
+
 export default  {
     register: function(context, payload) {
         return new Promise((resolve, reject) => {
@@ -78,5 +80,21 @@ export default  {
                     reject(error);
                 });
         });
+    },
+
+
+    me(context){
+
+        return new Promise((resolve, reject)=>{
+            axios.get('/api/me')
+            .then((response)=>{
+                context.commit('SET_USER_DETAILS', response.data)
+                console.log(response)
+            })
+            resolve(response)
+        })
+        .catch((error)=>{
+            reject(error)
+        })
     }
-};
+}

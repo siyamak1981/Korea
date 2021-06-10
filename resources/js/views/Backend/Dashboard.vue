@@ -545,6 +545,9 @@ export default {
   data() {
     return {};
   },
+  mounted() {
+    this.$store.dispatch("user/me");
+  },
   created() {
     this.checkUserState();
   },

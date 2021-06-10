@@ -15,7 +15,7 @@ trait HasPermissions
             })->count();
     }
 
-    public function getPermissionIdBySlug(...$permissions)
+    private function getPermissionIdBySlug(...$permissions)
     {
         return Permission::whereIn('slug', $permissions)->get()->pluck('id')->toArray();
     }

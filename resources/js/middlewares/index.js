@@ -1,4 +1,4 @@
-import auth from './checkPermissions'
+import auth from './auth'
 import guest from './guest'
 import checkPermissions from './checkPermissions'
 

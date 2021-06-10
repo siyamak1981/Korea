@@ -66,8 +66,11 @@ const router = new VueRouter({
             children: [
                 {
                     name: "ProfileIndex",
-                    path: "/profile-index",
-                    component: Index
+                    path: "/profile",
+                    component: Index,
+                    meta: {
+                        middleware: [Middlewares.auth]
+                    },
                 },
                 {
                     name: "ProfileEdit",

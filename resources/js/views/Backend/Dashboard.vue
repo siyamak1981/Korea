@@ -427,7 +427,7 @@
                       <a class="submenu-link" href="notifications.html">Notifications</a>
                     </li>
                     <li class="submenu-item">
-                      <a class="submenu-link" href="account.html">Account</a>
+                      <router-link class="submenu-link" :to="{name:'ProfileIndex'}">Profile</router-link>
                     </li>
                     <li class="submenu-item">
                       <a class="submenu-link" href="settings.html">Settings</a>
@@ -546,10 +546,14 @@ export default {
     return {};
   },
   mounted() {
-    this.$store.dispatch("user/me");
+    this.$store.dispatch("user/profile");
   },
   created() {
-    this.checkUserState();
+       this.checkUserState().then((response)=>{
+        if(this.loggedIn){
+            this.profile()
+        }
+    });
   },
   computed: {
     ...mapGetters({
@@ -560,6 +564,7 @@ export default {
     ...mapActions({
       logout: "user/logout",
       checkUserState: "user/setLoggedInState",
+       profile:"user/profile"
     }),
     logoutUser() {
       this.logout();

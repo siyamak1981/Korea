@@ -13,7 +13,6 @@ export default  {
                 });
         });
     },
-
     login(context, payload) {
         return new Promise((resolve, reject) => {
             axios
@@ -37,7 +36,6 @@ export default  {
                 });
         });
     },
-
     logout(context) {
         return new Promise(resolve => {
             localStorage.removeItem("access_token");
@@ -81,15 +79,11 @@ export default  {
                 });
         });
     },
-
-
-    me(context){
-
+    profile(context){
         return new Promise((resolve, reject)=>{
-            axios.get('/api/me')
+            axios.get('/api/profile')
             .then((response)=>{
                 context.commit('SET_USER_DETAILS', response.data)
-                console.log(response)
             })
             resolve(response)
         })

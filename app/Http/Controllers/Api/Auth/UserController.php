@@ -11,10 +11,7 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function me()
-    {
-        return new UserResource(Auth::user());
-    }
+ 
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return new UserResource(Auth::user());
     }
 
     /**

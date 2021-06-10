@@ -5012,7 +5012,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'App',
+  name: "App",
   data: function data() {
     return {};
   }
@@ -5583,17 +5583,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {};
   },
   mounted: function mounted() {
-    this.$store.dispatch("user/me");
+    this.$store.dispatch("user/profile");
   },
   created: function created() {
-    this.checkUserState();
+    var _this = this;
+
+    this.checkUserState().then(function (response) {
+      if (_this.loggedIn) {
+        _this.profile();
+      }
+    });
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
     loggedIn: "user/loggedIn"
   })),
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
     logout: "user/logout",
-    checkUserState: "user/setLoggedInState"
+    checkUserState: "user/setLoggedInState",
+    profile: "user/profile"
   })), {}, {
     logoutUser: function logoutUser() {
       this.logout();
@@ -5619,6 +5626,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -5629,11 +5643,247 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ProfileIndex",
   data: function data() {
     return {};
-  }
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
+    userDetails: "user/userDetails"
+  }))
 });
 
 /***/ }),
@@ -11337,7 +11587,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\ndiv[data-v-b46c7f3c] {\r\n    margin:300px;\n}\r\n", ""]);
+exports.push([module.i, "\n.app-profile-title[data-v-b46c7f3c] {\r\n  color: rgb(0, 0, 0);\r\n  font-size: 1.25rem;\r\n  font-weight: 600;\r\n  vertical-align: middle;\n}\r\n", ""]);
 
 // exports
 
@@ -33442,7 +33692,43 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _vm._m(13)
+                        _c(
+                          "div",
+                          {
+                            staticClass: "collapse submenu submenu-1",
+                            attrs: {
+                              id: "submenu-1",
+                              "data-parent": "#menu-accordion"
+                            }
+                          },
+                          [
+                            _c(
+                              "ul",
+                              { staticClass: "submenu-list list-unstyled" },
+                              [
+                                _vm._m(13),
+                                _vm._v(" "),
+                                _c(
+                                  "li",
+                                  { staticClass: "submenu-item" },
+                                  [
+                                    _c(
+                                      "router-link",
+                                      {
+                                        staticClass: "submenu-link",
+                                        attrs: { to: { name: "ProfileIndex" } }
+                                      },
+                                      [_vm._v("Profile")]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _vm._m(14)
+                              ]
+                            )
+                          ]
+                        )
                       ]),
                       _vm._v(" "),
                       _c("li", { staticClass: "nav-item has-submenu" }, [
@@ -33515,7 +33801,7 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _vm._m(14)
+                        _vm._m(15)
                       ]),
                       _vm._v(" "),
                       _c("li", { staticClass: "nav-item" }, [
@@ -33790,43 +34076,25 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "collapse submenu submenu-1",
-        attrs: { id: "submenu-1", "data-parent": "#menu-accordion" }
-      },
-      [
-        _c("ul", { staticClass: "submenu-list list-unstyled" }, [
-          _c("li", { staticClass: "submenu-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "submenu-link",
-                attrs: { href: "notifications.html" }
-              },
-              [_vm._v("Notifications")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "submenu-item" }, [
-            _c(
-              "a",
-              { staticClass: "submenu-link", attrs: { href: "account.html" } },
-              [_vm._v("Account")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "submenu-item" }, [
-            _c(
-              "a",
-              { staticClass: "submenu-link", attrs: { href: "settings.html" } },
-              [_vm._v("Settings")]
-            )
-          ])
-        ])
-      ]
-    )
+    return _c("li", { staticClass: "submenu-item" }, [
+      _c(
+        "a",
+        { staticClass: "submenu-link", attrs: { href: "notifications.html" } },
+        [_vm._v("Notifications")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "submenu-item" }, [
+      _c(
+        "a",
+        { staticClass: "submenu-link", attrs: { href: "settings.html" } },
+        [_vm._v("Settings")]
+      )
+    ])
   },
   function() {
     var _vm = this
@@ -33924,9 +34192,466 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    profile Pages index\n")])
+  return _c("div", { staticClass: "app-wrapper bg-success" }, [
+    _c("div", { staticClass: "app-content pt-3 p-md-3 p-lg-4 mt-5" }, [
+      _c(
+        "div",
+        { staticClass: "container-xl" },
+        [
+          _c("span", { staticClass: "app-profile-title" }, [
+            _vm._v("My Profile")
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.userDetails, function(userDetail, index) {
+            return _c("div", { key: index, staticClass: "row gy-4 mt-3" }, [
+              _c("div", { staticClass: "col-12 col-lg-6" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "app-card app-card-account shadow-sm d-flex flex-column align-items-start"
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "app-card-header p-3 border-bottom-0" },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "row align-items-center gx-3" },
+                          [
+                            _c("div", { staticClass: "col-auto" }, [
+                              _c("div", { staticClass: "app-icon-holder" }, [
+                                _c(
+                                  "svg",
+                                  {
+                                    staticClass: "bi bi-person",
+                                    attrs: {
+                                      width: "1em",
+                                      height: "1em",
+                                      viewBox: "0 0 16 16",
+                                      fill: "currentColor",
+                                      xmlns: "http://www.w3.org/2000/svg"
+                                    }
+                                  },
+                                  [
+                                    _c("path", {
+                                      attrs: {
+                                        "fill-rule": "evenodd",
+                                        d:
+                                          "M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _vm._m(0, true)
+                          ]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "app-card-body px-4 w-100" }, [
+                      _vm._m(1, true),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "item border-bottom py-3" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "row justify-content-between align-items-center"
+                          },
+                          [
+                            _c("div", { staticClass: "col-auto" }, [
+                              _vm._m(2, true),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "item-data" }, [
+                                _vm._v(_vm._s(userDetail.name))
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _vm._m(3, true)
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "item border-bottom py-3" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "row justify-content-between align-items-center"
+                          },
+                          [
+                            _c("div", { staticClass: "col-auto" }, [
+                              _vm._m(4, true),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "item-data" }, [
+                                _vm._v(_vm._s(userDetail.email))
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _vm._m(5, true)
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(6, true),
+                      _vm._v(" "),
+                      _vm._m(7, true)
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(8, true)
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-12 col-lg-6" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "app-card app-card-account shadow-sm d-flex flex-column align-items-start"
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "app-card-header p-3 border-bottom-0" },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "row align-items-center gx-3" },
+                          [
+                            _c("div", { staticClass: "col-auto" }, [
+                              _c("div", { staticClass: "app-icon-holder" }, [
+                                _c(
+                                  "svg",
+                                  {
+                                    staticClass: "bi bi-shield-check",
+                                    attrs: {
+                                      width: "1em",
+                                      height: "1em",
+                                      viewBox: "0 0 16 16",
+                                      fill: "currentColor",
+                                      xmlns: "http://www.w3.org/2000/svg"
+                                    }
+                                  },
+                                  [
+                                    _c("path", {
+                                      attrs: {
+                                        "fill-rule": "evenodd",
+                                        d:
+                                          "M5.443 1.991a60.17 60.17 0 0 0-2.725.802.454.454 0 0 0-.315.366C1.87 7.056 3.1 9.9 4.567 11.773c.736.94 1.533 1.636 2.197 2.093.333.228.626.394.857.5.116.053.21.089.282.11A.73.73 0 0 0 8 14.5c.007-.001.038-.005.097-.023.072-.022.166-.058.282-.111.23-.106.525-.272.857-.5a10.197 10.197 0 0 0 2.197-2.093C12.9 9.9 14.13 7.056 13.597 3.159a.454.454 0 0 0-.315-.366c-.626-.2-1.682-.526-2.725-.802C9.491 1.71 8.51 1.5 8 1.5c-.51 0-1.49.21-2.557.491zm-.256-.966C6.23.749 7.337.5 8 .5c.662 0 1.77.249 2.813.525a61.09 61.09 0 0 1 2.772.815c.528.168.926.623 1.003 1.184.573 4.197-.756 7.307-2.367 9.365a11.191 11.191 0 0 1-2.418 2.3 6.942 6.942 0 0 1-1.007.586c-.27.124-.558.225-.796.225s-.526-.101-.796-.225a6.908 6.908 0 0 1-1.007-.586 11.192 11.192 0 0 1-2.417-2.3C2.167 10.331.839 7.221 1.412 3.024A1.454 1.454 0 0 1 2.415 1.84a61.11 61.11 0 0 1 2.772-.815z"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("path", {
+                                      attrs: {
+                                        "fill-rule": "evenodd",
+                                        d:
+                                          "M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _vm._m(9, true)
+                          ]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "app-card-body px-4 w-100" }, [
+                      _c("div", { staticClass: "item border-bottom py-3" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "row justify-content-between align-items-center"
+                          },
+                          [
+                            _c("div", { staticClass: "col-auto" }, [
+                              _vm._m(10, true),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "item-data" }, [
+                                _vm._v(_vm._s(userDetail.created_at))
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _vm._m(11, true)
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(12, true)
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(13, true)
+                  ]
+                )
+              ])
+            ])
+          })
+        ],
+        2
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(14)
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-auto" }, [
+      _c("h4", { staticClass: "app-card-title" }, [_vm._v("Profile")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item border-bottom py-3" }, [
+      _c(
+        "div",
+        { staticClass: "row justify-content-between align-items-center" },
+        [
+          _c("div", { staticClass: "col-auto" }, [
+            _c("div", { staticClass: "item-label mb-2" }, [
+              _c("strong", [_vm._v("Photo")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "item-data" }, [
+              _c("img", {
+                staticClass: "profile-image",
+                attrs: { src: "assets/images/user.png", alt: "" }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col text-right" }, [
+            _c(
+              "a",
+              { staticClass: "btn-sm app-btn-secondary", attrs: { href: "#" } },
+              [_vm._v("Change")]
+            )
+          ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item-label" }, [
+      _c("strong", [_vm._v("Name")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col text-right" }, [
+      _c(
+        "a",
+        { staticClass: "btn-sm app-btn-secondary", attrs: { href: "#" } },
+        [_vm._v("Change")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item-label" }, [
+      _c("strong", [_vm._v("Email")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col text-right" }, [
+      _c(
+        "a",
+        { staticClass: "btn-sm app-btn-secondary", attrs: { href: "#" } },
+        [_vm._v("Change")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item border-bottom py-3" }, [
+      _c(
+        "div",
+        { staticClass: "row justify-content-between align-items-center" },
+        [
+          _c("div", { staticClass: "col-auto" }, [
+            _c("div", { staticClass: "item-label" }, [
+              _c("strong", [_vm._v("Website")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "item-data" }, [
+              _vm._v("https://johndoewebsite.com")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col text-right" }, [
+            _c(
+              "a",
+              { staticClass: "btn-sm app-btn-secondary", attrs: { href: "#" } },
+              [_vm._v("Change")]
+            )
+          ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item border-bottom py-3" }, [
+      _c(
+        "div",
+        { staticClass: "row justify-content-between align-items-center" },
+        [
+          _c("div", { staticClass: "col-auto" }, [
+            _c("div", { staticClass: "item-label" }, [
+              _c("strong", [_vm._v("Location")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "item-data" }, [_vm._v("New York")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col text-right" }, [
+            _c(
+              "a",
+              { staticClass: "btn-sm app-btn-secondary", attrs: { href: "#" } },
+              [_vm._v("Change")]
+            )
+          ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "app-card-footer p-4 mt-auto" }, [
+      _c("a", { staticClass: "btn app-btn-secondary", attrs: { href: "#" } }, [
+        _vm._v("Edit Profile")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-auto" }, [
+      _c("h4", { staticClass: "app-card-title" }, [_vm._v("Security")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item-label" }, [
+      _c("strong", [_vm._v("Profile Date")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col text-right" }, [
+      _c(
+        "a",
+        { staticClass: "btn-sm app-btn-secondary", attrs: { href: "#" } },
+        [_vm._v("Change")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item border-bottom py-3" }, [
+      _c(
+        "div",
+        { staticClass: "row justify-content-between align-items-center" },
+        [
+          _c("div", { staticClass: "col-auto" }, [
+            _c("div", { staticClass: "item-label" }, [
+              _c("strong", [_vm._v("Two-Factor Authentication")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "item-data" }, [
+              _vm._v("You haven't set up two-factor authentication.")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col text-right" }, [
+            _c(
+              "a",
+              { staticClass: "btn-sm app-btn-secondary", attrs: { href: "#" } },
+              [_vm._v("Set up")]
+            )
+          ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "app-card-footer p-4 mt-auto" }, [
+      _c("a", { staticClass: "btn app-btn-secondary", attrs: { href: "#" } }, [
+        _vm._v("Edit Security")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("footer", { staticClass: "app-footer" }, [
+      _c("div", { staticClass: "container text-center py-3" }, [
+        _c("small", { staticClass: "copyright" }, [
+          _vm._v("\n        Designed with\n        "),
+          _c("i", {
+            staticClass: "fab fa-heart",
+            staticStyle: { color: "#fb866a" }
+          }),
+          _vm._v("\n        by\n        "),
+          _c(
+            "a",
+            {
+              staticClass: "app-link",
+              attrs: {
+                href: "http://themes.3rdwavemedia.com",
+                target: "_blank"
+              }
+            },
+            [_vm._v("Siyamak Abasnezhad")]
+          ),
+          _vm._v(" for developers\n      ")
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -52086,8 +52811,11 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_10__["default"]({
     },
     children: [{
       name: "ProfileIndex",
-      path: "/profile-index",
-      component: _views_Backend_Profile_Index_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+      path: "/profile",
+      component: _views_Backend_Profile_Index_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+      meta: {
+        middleware: [_middlewares__WEBPACK_IMPORTED_MODULE_0__["default"].auth]
+      }
     }, {
       name: "ProfileEdit",
       path: "/profile/:id",
@@ -52243,11 +52971,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     });
   },
-  me: function me(context) {
+  profile: function profile(context) {
     return new Promise(function (resolve, reject) {
-      axios.get('/api/me').then(function (response) {
+      axios.get('/api/profile').then(function (response) {
         context.commit('SET_USER_DETAILS', response.data);
-        console.log(response);
       });
       resolve(response);
     })["catch"](function (error) {

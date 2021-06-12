@@ -26,5 +26,5 @@ Route::post('/reset-password', 'Api\Auth\ResetPasswordController@reset')->name('
 Route::group(['middleware'=>'auth:api'], function(){
     Route::get('/profile', 'Api\Auth\UserController@index')->name('api.profile');
     Route::get('/profile/edit/{name}', 'Api\Auth\UserController@edit')->name('api.edit_profile');
-    Route::post('/profile/update/{name}', 'Api\Auth\UserController@update')->name('api.update_profile');
+    Route::post('/profile/update', 'Api\Auth\UserController@update')->name('api.update_profile');
     });

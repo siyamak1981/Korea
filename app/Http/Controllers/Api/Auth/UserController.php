@@ -7,11 +7,11 @@ use App\Http\Requests\UserRegisterRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+use App\User;
 
 class UserController extends Controller
 {
- 
+
     /**
      * Display a listing of the resource.
      *
@@ -75,11 +75,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $profile = auth('api')->user();
         $profile->name = $request->name;
-        $profile->email = $request->email;
         $profile->password = bcrypt($request->password);
         $profile->save();
         return ['message' => "Success"];
@@ -95,4 +94,5 @@ class UserController extends Controller
     {
         //
     }
+
 }

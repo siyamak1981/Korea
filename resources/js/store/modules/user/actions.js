@@ -90,5 +90,21 @@ export default  {
         .catch((error)=>{
             reject(error)
         })
-    }
+    },
+    // updateProfile(context, payload){
+    //     return new Promise(resolve => {
+    //         axios
+    //         .post(`/api/profile/update/`, payload)
+            
+    //         .then(response => {
+    //                 console.log(this.userDetails.name)
+                    
+    //                 resolve(response);
+    //             })
+    //             .catch(error => {
+    //                 reject(error);
+    //             });
+    //     });
+    // },
+  
 }

@@ -126,7 +126,7 @@
               </div>
               <!--//app-card-body-->
               <div class="app-card-footer p-4 mt-auto">
-                <a class="btn app-btn-secondary" href="#">Edit Profile</a>
+                <router-link class="btn app-btn-secondary" :to="`profile/${userDetail.name}`">Edit Profile</router-link>
               </div>
               <!--//app-card-footer-->
             </div>
@@ -250,6 +250,7 @@ export default {
   computed: {
     ...mapGetters({
       userDetails: "user/userDetails",
+      
     }),
   },
 };

@@ -1,3 +1,5 @@
+import { reject } from "lodash";
+
 export default  {
     register: function(context, payload) {
         return new Promise((resolve, reject) => {
@@ -11,7 +13,6 @@ export default  {
                 });
         });
     },
-
     login(context, payload) {
         return new Promise((resolve, reject) => {
             axios
@@ -35,7 +36,6 @@ export default  {
                 });
         });
     },
-
     logout(context) {
         return new Promise(resolve => {
             localStorage.removeItem("access_token");
@@ -78,5 +78,33 @@ export default  {
                     reject(error);
                 });
         });
-    }
-};
+    },
+    profile(context){
+        return new Promise((resolve, reject)=>{
+            axios.get('/api/profile')
+            .then((response)=>{
+                context.commit('SET_USER_DETAILS', response.data)
+            })
+            resolve(response)
+        })
+        .catch((error)=>{
+            reject(error)
+        })
+    },
+    // updateProfile(context, payload){
+    //     return new Promise(resolve => {
+    //         axios
+    //         .post(`/api/profile/update/`, payload)
+            
+    //         .then(response => {
+    //                 console.log(this.userDetails.name)
+                    
+    //                 resolve(response);
+    //             })
+    //             .catch(error => {
+    //                 reject(error);
+    //             });
+    //     });
+    // },
+  
+}

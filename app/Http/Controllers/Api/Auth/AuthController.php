@@ -40,15 +40,14 @@ class AuthController extends Controller
 
     {
 
-        // $developerRole = Role::developer()->first();
+        $developerRole = Role::developer()->first();
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
-        // $user->roles()->attach($developerRole->id);
+        $user->roles()->attach($developerRole->id);
         if (!$user) {
-
             return response()->json(["Error" => "User Does not Created !"], 500);
         }
 

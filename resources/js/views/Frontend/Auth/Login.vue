@@ -143,7 +143,7 @@ export default {
             title: "login Successfully !",
           });
           if (localStorage.getItem("access_token") != null) {
-            this.$router.push({ name: "ProfileIndex" });
+            this.$router.push({ name: "Dashboard" });
           }
         })
         .catch((error) => {

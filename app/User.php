@@ -8,6 +8,8 @@ use Illuminate\Notifications\Notifiable;
 use App\Traits\HasPermissions;
 use Laravel\Passport\HasApiTokens;
 use App\Notifications\ResetPasswordNotification;
+use App\Models\Role;
+use App\Models\Permission;
 
 class User extends Authenticatable
 {

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\HasPermissions;
+use App\Models\Permissions;
 
 
 class Role extends Model

@@ -308,7 +308,7 @@
                       />
                     </svg>
                   </span>
-                  <span class="nav-link-text">Overview</span>
+                  <router-link class="nav-link-text" :to="{name:'Dashboard'}">Dashboard</router-link>
                 </a>
                 <!--//nav-link-->
               </li>
@@ -541,6 +541,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import { can } from "../../helpers/can";
 export default {
   data() {
     return {};
@@ -549,10 +550,13 @@ export default {
     this.$store.dispatch("user/profile");
   },
   created() {
-       this.checkUserState().then((response)=>{
-        if(this.loggedIn){
-            this.profile()
-        }
+    this.checkUserState().then((response) => {
+      if (this.loggedIn) {
+        this.profile().then(() => {
+      
+          // can("view-developer-dashboard");
+        });
+      }
     });
   },
   computed: {
@@ -564,7 +568,7 @@ export default {
     ...mapActions({
       logout: "user/logout",
       checkUserState: "user/setLoggedInState",
-       profile:"user/profile"
+      profile: "user/profile",
     }),
     logoutUser() {
       this.logout();

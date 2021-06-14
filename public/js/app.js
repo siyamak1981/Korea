@@ -5030,6 +5030,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _helpers_can__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helpers/can */ "./resources/js/helpers/can.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -5578,6 +5579,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
@@ -5590,7 +5592,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     this.checkUserState().then(function (response) {
       if (_this.loggedIn) {
-        _this.profile();
+        _this.profile().then(function () {// can("view-developer-dashboard");
+        });
       }
     });
   },
@@ -5633,90 +5636,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -33791,10 +33710,16 @@ var render = function() {
                               )
                             ]),
                             _vm._v(" "),
-                            _c("span", { staticClass: "nav-link-text" }, [
-                              _vm._v("Overview")
-                            ])
-                          ]
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "nav-link-text",
+                                attrs: { to: { name: "Dashboard" } }
+                              },
+                              [_vm._v("Dashboard")]
+                            )
+                          ],
+                          1
                         )
                       ]),
                       _vm._v(" "),
@@ -34532,39 +34457,23 @@ var render = function() {
                           "row justify-content-between align-items-center"
                       },
                       [
-                        _c("div", { staticClass: "col-12" }, [
-                          _vm._m(2),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.userDetails.email,
-                                expression: "userDetails.email"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "email",
-                              name: "email",
-                              placeholder: "email.."
-                            },
-                            domProps: { value: _vm.userDetails.email },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.userDetails,
-                                  "email",
-                                  $event.target.value
+                        _c(
+                          "div",
+                          { staticClass: "col-12" },
+                          [
+                            _vm._m(2),
+                            _vm._v(" "),
+                            _vm._l(_vm.userDetails, function(userDetail) {
+                              return _c("div", { key: userDetail.id }, [
+                                _vm._v(
+                                  _vm._s(userDetail.email) +
+                                    "\n                \n                    "
                                 )
-                              }
-                            }
-                          })
-                        ])
+                              ])
+                            })
+                          ],
+                          2
+                        )
                       ]
                     )
                   ])
@@ -53226,6 +53135,27 @@ new Vue({
 
 /***/ }),
 
+/***/ "./resources/js/helpers/can.js":
+/*!*************************************!*\
+  !*** ./resources/js/helpers/can.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store */ "./resources/js/store/index.js");
+
+/* harmony default export */ __webpack_exports__["default"] = (function (permission) {
+  var userPermissions = _store__WEBPACK_IMPORTED_MODULE_0__["default"].getters["user/userDetails"];
+
+  if (permission.length > 0) {
+    return userPermissions.includes(permission);
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/middlewares/auth.js":
 /*!******************************************!*\
   !*** ./resources/js/middlewares/auth.js ***!
@@ -53255,25 +53185,40 @@ function auth(_ref) {
 /*!******************************************************!*\
   !*** ./resources/js/middlewares/checkPermissions.js ***!
   \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-// import can from "../helpers/can";
-// export default function checkPermissions({ next, to, from, router }) {
-//     console.log({to, from});
-//     const requiredPermissions = to.meta['middleware'];
-//     console.log(requiredPermissions);
-//     let canEnter = false;
-//     requiredPermissions.forEach(permission => {
-//         if (can(permission)) {
-//             canEnter = true;
-//         }
-//     });
-//     if (canEnter) {
-//         return next();
-//     }
-//     return router.push({ name: "home" });
-// }
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return checkPermissions; });
+/* harmony import */ var _helpers_can__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/can */ "./resources/js/helpers/can.js");
+
+function checkPermissions(_ref) {
+  var next = _ref.next,
+      to = _ref.to,
+      from = _ref.from,
+      router = _ref.router;
+  console.log({
+    to: to,
+    from: from
+  });
+  var requiredPermissions = to.meta['middleware'];
+  console.log(requiredPermissions);
+  var canEnter = false;
+  requiredPermissions.forEach(function (permission) {
+    if (Object(_helpers_can__WEBPACK_IMPORTED_MODULE_0__["default"])(permission)) {
+      canEnter = true;
+    }
+  });
+
+  if (canEnter) {
+    return next();
+  }
+
+  return router.push({
+    name: "home"
+  });
+}
 
 /***/ }),
 
@@ -53314,14 +53259,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./auth */ "./resources/js/middlewares/auth.js");
 /* harmony import */ var _guest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./guest */ "./resources/js/middlewares/guest.js");
 /* harmony import */ var _checkPermissions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./checkPermissions */ "./resources/js/middlewares/checkPermissions.js");
-/* harmony import */ var _checkPermissions__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_checkPermissions__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   auth: _auth__WEBPACK_IMPORTED_MODULE_0__["default"],
   guest: _guest__WEBPACK_IMPORTED_MODULE_1__["default"],
-  checkPermissions: _checkPermissions__WEBPACK_IMPORTED_MODULE_2___default.a
+  checkPermissions: _checkPermissions__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 
 /***/ }),

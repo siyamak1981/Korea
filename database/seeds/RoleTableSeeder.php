@@ -36,7 +36,8 @@ class RoleTableSeeder extends Seeder
             ]
         ]);
         $developerRole = App\Models\Role::developer()->firstOrFail();
-        $developerPermissions = App\Models\Permission::whereIn('slug', ['view-developer-dashboard'])->get()->pluck('id')->toArray();
+        $developerPermissions = App\Models\Permission::whereIn('slug', ['view-developer-dashboard'])->get()
+        ->pluck('id')->toArray();
         $developerRole->permissions()->attach($developerPermissions);
     }
 }

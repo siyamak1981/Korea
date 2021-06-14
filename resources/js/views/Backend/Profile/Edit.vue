@@ -39,13 +39,9 @@
                       <div class="item-label">
                         <strong>Email</strong>
                       </div>
-                      <input
-                        type="email"
-                        name="email"
-                        v-model="userDetails.email"
-                        class="form-control"
-                        placeholder="email.."
-                      />
+                      <div v-for ="userDetail in userDetails" :key="userDetail.id">{{userDetail.email}}
+                  
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -108,86 +104,6 @@
               </div>
             </div>
           </div>
-          <!-- <div class="col-12 col-lg-6">
-            <div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
-              <div class="app-card-header p-3 border-bottom-0">
-                <div class="row align-items-center gx-3">
-                  <div class="col-auto">
-                    <h4 class="app-card-title">Security</h4>
-                  </div>
-                </div>
-              </div>
-              <div class="app-card-body px-4 w-100">
-                <div class="item border-bottom py-3">
-                  <div class="row justify-content-between align-items-center">
-                    <div class="col-auto">
-                      <div class="item-label">
-                        <strong>Profile Date</strong>
-                      </div>
-                      <input
-                        type="date"
-                        v-model="userDetails.created_at"
-                        class="form-control"
-                        id="exampleFormControlInput1"
-                        placeholder="Date"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="item border-bottom py-3">
-                  <div class="row justify-content-between align-items-center">
-                    <div class="col-12">
-                      <div class="item-label">
-                        <strong>Old Password</strong>
-                      </div>
-                      <input
-                        type="password"
-                        v-model="user.oldPassword"
-                        class="form-control"
-                        id="exampleFormControlInput1"
-                        placeholder="Old Password"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="item border-bottom py-3">
-                  <div class="row justify-content-between align-items-center">
-                    <div class="col-12">
-                      <div class="item-label">
-                        <strong>New Password</strong>
-                      </div>
-                      <input
-                        type="password"
-                        v-model="user.newPassword"
-                        class="form-control"
-                        id="exampleFormControlInput1"
-                        placeholder="New Password"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="item border-bottom py-3">
-                  <div class="row justify-content-between align-items-center">
-                    <div class="col-12">
-                      <div class="item-label">
-                        <strong>New Password Repeat</strong>
-                      </div>
-                      <input
-                        type="password"
-                        v-model="user.newPasswordConfirmation"
-                        class="form-control"
-                        id="exampleFormControlInput1"
-                        placeholder="New Password Repeat"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="app-card-footer p-4 mt-auto">
-                <a href="#" class="btn app-btn-secondary">Edit Security</a>
-              </div>
-            </div>
-          </div>-->
         </div>
       </div>
     </div>

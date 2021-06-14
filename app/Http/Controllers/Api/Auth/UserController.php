@@ -80,6 +80,7 @@ class UserController extends Controller
         $profile = auth('api')->user();
         $profile->name = $request->name;
         $profile->password = bcrypt($request->password);
+        $profile->created_at = $request->created_at;
         $profile->save();
         return ['message' => "Success"];
     }
